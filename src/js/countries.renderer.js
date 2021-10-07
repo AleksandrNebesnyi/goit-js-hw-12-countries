@@ -1,14 +1,13 @@
-import countryCardTpl from '../template/country-card';
-import searchCountriesListTpl from '../template/search-countries-list';
-import { error, defaultModules, defaults } from '@pnotify/core';
-import '@pnotify/core/dist/BrightTheme.css';
-import * as PNotifyDesktop from '@pnotify/desktop';
- 
-defaults.delay = 2000;
-defaults.closer = false;
-defaults.sticker = false;
-defaultModules.set(PNotifyDesktop, {});
+import countryCardTpl from "../template/country-card";
+import searchCountriesListTpl from "../template/search-countries-list";
+import { error, defaultModules, defaults } from "@pnotify/core";
+import "@pnotify/core/dist/BrightTheme.css";
+import * as PNotifyDesktop from "@pnotify/desktop";
 
+// defaults.delay = 2000;
+// defaults.closer = false;
+// defaults.sticker = false;
+// defaultModules.set(PNotifyDesktop, {});
 
 // /**
 //  * Класс который рендерит разметку на основе полученных
@@ -30,8 +29,8 @@ defaultModules.set(PNotifyDesktop, {});
 //         this.clearCountriesList();
 //         this.clearCountryCard();
 //         /**
-//          * Если бекенд вернул массив с одной страной, в интерфейсе 
-//          * рендерится разметка с данными о стране: название, столица, 
+//          * Если бекенд вернул массив с одной страной, в интерфейсе
+//          * рендерится разметка с данными о стране: название, столица,
 //          * население, языки и флаг.
 //          */
 //         if(data.length === 1)
@@ -39,7 +38,7 @@ defaultModules.set(PNotifyDesktop, {});
 //             this.countryCard.insertAdjacentHTML('beforeend', countryCardTpl(data));
 //         }
 //         /**
-//          * Если бекенд вернул от 2-х до 10-х стран, под инпутом 
+//          * Если бекенд вернул от 2-х до 10-х стран, под инпутом
 //          * отображается список имен найденных стран.
 //          */
 //         else if(data.length < 10)
@@ -49,9 +48,9 @@ defaultModules.set(PNotifyDesktop, {});
 //         else
 //         {
 //             /**
-//              * Если бекенд вернул больше чем 10 стран подошедших 
-//              * под критерий введенный пользователем, в интерфейсе 
-//              * отображается нотификация о том, что необходимо сделать 
+//              * Если бекенд вернул больше чем 10 стран подошедших
+//              * под критерий введенный пользователем, в интерфейсе
+//              * отображается нотификация о том, что необходимо сделать
 //              * запрос более специфичным.
 //              */
 //             error({
