@@ -4,7 +4,12 @@ import getRefs from "./getRefs";
 import fetchCountries from "./fetchCountries";
 import debounce from "lodash.debounce";
 import { error } from "@pnotify/core";
+const myError = error({
+  text: "I'm an error message.",
+});
+// console.log(myError);
 // var debounce = require("lodash.debounce");
+console.log(fetchCountries());
 
 /*
  * 1. Рендерим разметку элементов списка
@@ -50,8 +55,8 @@ function onFilterChange(evt) {
   console.log(filter);
   const filteredItem = tech.filter((item) => {
     item.label.toLowerCase().includes(filter);
+    console.log(filteredItem);
   });
-  console.log(filteredItem);
 }
 
 // API.fetchPokemon(searchQuery)
@@ -60,9 +65,9 @@ function onFilterChange(evt) {
 //     .finally(() => form.reset());
 // }
 
-fetchCountries(po)
-  .then((data) => console.log(data))
-  .catch((error) => console.log(`Ошибка при загрузке данных: ${error}`));
+// fetchCountries("us")
+//   .then((data) => console.log(data))
+//   .catch((error) => console.log(`Ошибка при загрузке данных: ${error}`));
 
 //    .then(data =>
 //     {
@@ -77,3 +82,25 @@ fetchCountries(po)
 //     .then(countries => CountriesRenderer.makeCountriesList(countries))
 //     .catch(error => console.log(error));
 // }, 500));
+
+// const url = "https://pixabay.com/api/video?q=cars";
+// const options = {
+//   headers: {
+//     Authorization: "23744407-6e41977eb223c860dbad454a0",
+//   },
+// };
+
+// const API = fetch(url, options)
+//   .then((response) => response.json())
+//   .then(console.log);
+// console.log(API);
+// fetch(
+//   "https://pixabay.com/api/videos/?key=23744407-6e41977eb223c860dbad454a0&q=yellow+flowers"
+// )
+//   .then((response) => response.json())
+//   .then(console.log);
+
+// fetch("https://restcountries.com/v2/name/united")
+//   .then((response) => response.json())
+//   .then(console.log)
+//   .catch((error) => console.log(error));

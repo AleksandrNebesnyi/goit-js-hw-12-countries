@@ -7,13 +7,23 @@
  * делать запрос на сервер и возвращать полученные данные
  */
 
-const BASE_URL = "https://restcountries.com/v2/name/";
-export default function fetchCountries(searchQuery) {
-  {
-    return fetch(`${BASE_URL}${searchQuery}`).then((response) =>
-      response.json(console.log)
-    );
-  }
-}
+// const BASE_URL = "https://restcountries.com/v2/name/";
+// export default function fetchCountries(searchQuery) {
+//   {
+//     return fetch(`${BASE_URL}${searchQuery}`).then((response) =>
+//       response.json()
+//     );
+//   }
+// }
 
 // https://restcountries.com/v2/name/{name}
+
+const BASE_URL = "https://restcountries.com/v2/name/";
+export default function fetchCountries(searchQuery) {
+  return fetch(`${BASE_URL}${searchQuery}`)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => `Ошибка при загрузке данных: ${error}`);
+}
