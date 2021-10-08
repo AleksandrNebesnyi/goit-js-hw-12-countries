@@ -1,8 +1,10 @@
-import countryCardTpl from "../template/country-card";
-import searchCountriesListTpl from "../template/search-countries-list";
-import { error, defaultModules, defaults } from "@pnotify/core";
-import "@pnotify/core/dist/BrightTheme.css";
-import * as PNotifyDesktop from "@pnotify/desktop";
+import countryCard from "../template/country-card.hbs";
+import CountriesList from "../template/search-countries-list.hbs";
+import { error } from "@pnotify/core";
+// import "@pnotify/core/dist/BrightTheme.css";
+// import * as PNotifyDesktop from "@pnotify/desktop";
+import getRefs from "./getRefs";
+const refs = getRefs();
 
 // defaults.delay = 2000;
 // defaults.closer = false;
@@ -77,3 +79,24 @@ import * as PNotifyDesktop from "@pnotify/desktop";
 // }
 
 // export default new CountriesRenderer();
+
+function RenderCountriList(data) {
+  if (data.length === 1) {
+    // рендерим по шаблону карточку с данными по стране.
+    refs.countryCardContainer.insertAdjacentElement(
+      "beforeend",
+      countryCard(data)
+    );
+  } else if (data.length < 10) {
+    // рендерим список стран.
+    refs.countryCardContainer.insertAdjacentElement(
+      "beforeend",
+      CountriesList(data)
+    );
+  } else {
+    error({
+      text: "Too many matches found. Please enter a more specific query!",
+    });
+  }
+}
+export default { RenderCountriList };
