@@ -1,15 +1,27 @@
 import CountriesService from "./countries.service";
 import CountriesRenderer from "./countries.renderer";
 import getRefs from "./getRefs";
-import fetchCountries from "./fetchCountries";
+import API from "./fetchCountries";
 import debounce from "lodash.debounce";
 import { error } from "@pnotify/core";
+// var debounce = require("lodash.debounce");
 const myError = error({
   text: "I'm an error message.",
 });
-// console.log(myError);
-// var debounce = require("lodash.debounce");
-console.log(fetchCountries());
+
+const BASE_URL = "https://restcountries.com/v2/name/";
+function fetchCountries(searchQuery) {
+  return fetch(`${BASE_URL}${searchQuery}`)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => `Ошибка при загрузке данных: ${error}`);
+}
+
+fetchCountries("ita")
+  .then(console.log)
+  .catch((error) => console.log(error));
 
 /*
  * 1. Рендерим разметку элементов списка
@@ -49,15 +61,24 @@ console.log(fetchCountries());
 // }
 const refs = getRefs();
 
-refs.input.addEventListener("input", debounce(onFilterChange, 500));
-function onFilterChange(evt) {
-  const filter = evt.target.value.toLowerCase();
-  console.log(filter);
-  const filteredItem = tech.filter((item) => {
-    item.label.toLowerCase().includes(filter);
-    console.log(filteredItem);
-  });
-}
+// fetchCountries(ital).then((data) => console.log);
+
+// refs.input.addEventListener("input", debounce(onFilterChange, 500));
+// function onFilterChange(evt) {
+//   const filter = evt.target.value.toLowerCase();
+//   fetchCountries(filter)
+//     .then((countries) => console.log(countries))
+//     .catch((error) => console.log(error));
+//   // const filteredItem = tech.filter((item) => {
+//   //   item.label.toLowerCase().includes(filter);
+//   //   console.log(filteredItem);
+
+//   // });
+// }
+
+// fetchCountries(event.target.value)
+//   .then((countries) => CountriesRenderer.makeCountriesList(countries))
+//   .catch((error) => console.log(error));
 
 // API.fetchPokemon(searchQuery)
 //     .then(renderPokemonCard)
@@ -82,25 +103,3 @@ function onFilterChange(evt) {
 //     .then(countries => CountriesRenderer.makeCountriesList(countries))
 //     .catch(error => console.log(error));
 // }, 500));
-
-// const url = "https://pixabay.com/api/video?q=cars";
-// const options = {
-//   headers: {
-//     Authorization: "23744407-6e41977eb223c860dbad454a0",
-//   },
-// };
-
-// const API = fetch(url, options)
-//   .then((response) => response.json())
-//   .then(console.log);
-// console.log(API);
-// fetch(
-//   "https://pixabay.com/api/videos/?key=23744407-6e41977eb223c860dbad454a0&q=yellow+flowers"
-// )
-//   .then((response) => response.json())
-//   .then(console.log);
-
-// fetch("https://restcountries.com/v2/name/united")
-//   .then((response) => response.json())
-//   .then(console.log)
-//   .catch((error) => console.log(error));
