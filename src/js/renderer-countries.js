@@ -80,23 +80,23 @@ const refs = getRefs();
 
 // export default new CountriesRenderer();
 
-function RenderCountriList(data) {
-  if (data.length === 1) {
-    // рендерим по шаблону карточку с данными по стране.
-    refs.countryCardContainer.insertAdjacentElement(
-      "beforeend",
-      countryCard(data)
-    );
-  } else if (data.length < 10) {
-    // рендерим список стран.
-    refs.countryCardContainer.insertAdjacentElement(
-      "beforeend",
-      CountriesList(data)
-    );
-  } else {
-    error({
-      text: "Too many matches found. Please enter a more specific query!",
-    });
-  }
-}
-export default { RenderCountriList };
+// function RenderCountriList(data) {
+//   if (data.length === 1) {
+//     // рендерим по шаблону карточку с данными по стране.
+//     refs.countryCardContainer.insertAdjacentElement(
+//       "beforeend",
+//       countryCard(data)
+//     );
+//   } else if (data.length < 10) {
+//     // рендерим список стран.
+//     refs.countryCardContainer.insertAdjacentElement(
+//       "beforeend",
+//       CountriesList(data)
+//     );
+//   } else {
+//     error({
+//       text: "Too many matches found. Please enter a more specific query!",
+//     });
+//   }
+// }
+// export default { RenderCountriList };
