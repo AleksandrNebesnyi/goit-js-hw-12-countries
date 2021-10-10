@@ -1,10 +1,15 @@
 import countryCard from "../template/country-card.hbs";
 import CountriesList from "../template/search-countries-list.hbs";
 import { error } from "@pnotify/core";
+
 // import "@pnotify/core/dist/BrightTheme.css";
 // import * as PNotifyDesktop from "@pnotify/desktop";
 import getRefs from "./getRefs";
 const refs = getRefs();
+
+// const myError = error({
+//   text: "Too many matches found. Please enter a more specific query!",
+// });
 
 // defaults.delay = 2000;
 // defaults.closer = false;
@@ -16,87 +21,48 @@ const refs = getRefs();
 //  * данных о стране или странах
 //  */
 
-// class CountriesRenderer
-// {
-//     constructor()
-//     {
-//         //список под инпутом
-//         this.countriesList = document.querySelector('.js-countries-list');
-//         //карточка страны
-//         this.countryCard = document.querySelector('.js-country-card-container');
-//     }
+class RenderCoutries {
+  constructor() {
+    //   список стран
+    this.CountriesList = refs.countriesLlist;
+    //   карточка страны
+    this.countryCardContainer = refs.countryCardContainer;
+    this.error = error;
+  }
 
-//     makeCountriesList(data)
-//     {
-//         this.clearCountriesList();
-//         this.clearCountryCard();
-//         /**
-//          * Если бекенд вернул массив с одной страной, в интерфейсе
-//          * рендерится разметка с данными о стране: название, столица,
-//          * население, языки и флаг.
-//          */
-//         if(data.length === 1)
-//         {
-//             this.countryCard.insertAdjacentHTML('beforeend', countryCardTpl(data));
-//         }
-//         /**
-//          * Если бекенд вернул от 2-х до 10-х стран, под инпутом
-//          * отображается список имен найденных стран.
-//          */
-//         else if(data.length < 10)
-//         {
-//             this.countriesList.insertAdjacentHTML('beforeend', searchCountriesListTpl(data));
-//         }
-//         else
-//         {
-//             /**
-//              * Если бекенд вернул больше чем 10 стран подошедших
-//              * под критерий введенный пользователем, в интерфейсе
-//              * отображается нотификация о том, что необходимо сделать
-//              * запрос более специфичным.
-//              */
-//             error({
-//                 text: 'Too many matches found. Please enter a more specific query!',
-//               });
-//         }
-//     }
+  RenderCountriList(data) {
+    this.clearCountriesList();
+    this.clearCountryCardContainer();
+    this.clearErrorMesage();
+    if (data.length === 1) {
+      // рендерим по шаблону карточку с данными по стране.
+      this.countryCardContainer.insertAdjacentHTML(
+        "beforeend",
+        countryCard(data)
+      );
+    } else if (data.length < 10) {
+      // рендерим список стран.
+      this.CountriesList.insertAdjacentHTML("beforeend", CountriesList(data));
+    } else {
+      error({
+        text: "Too many matches found. Please enter a more specific query!",
+      });
+    }
+  }
+  // Очистка списка стран
+  clearCountriesList() {
+    this.CountriesList.innerHTML = "";
+  }
 
-//     /**
-//      * Очищает список под инпутом
-//      */
-//     clearCountriesList()
-//     {
-//         this.countriesList.innerHTML = '';
-//     }
+  // Очистка карточки страны
+  clearCountryCardContainer() {
+    this.countryCardContainer.innerHTML = "";
+  }
 
-//     /**
-//      * очищает карточку страны
-//      */
-//     clearCountryCard()
-//     {
-//         this.countryCard.innerHTML = '';
-//     }
-// }
+  clearErrorMesage() {
+    this.error = "";
+  }
+}
 
-// export default new CountriesRenderer();
-
-// function RenderCountriList(data) {
-//   if (data.length === 1) {
-//     // рендерим по шаблону карточку с данными по стране.
-//     refs.countryCardContainer.insertAdjacentElement(
-//       "beforeend",
-//       countryCard(data)
-//     );
-//   } else if (data.length < 10) {
-//     // рендерим список стран.
-//     refs.countryCardContainer.insertAdjacentElement(
-//       "beforeend",
-//       CountriesList(data)
-//     );
-//   } else {
-//     error({
-//       text: "Too many matches found. Please enter a more specific query!",
-//     });
-//   }
-// }
-// export default { RenderCountriList };
+const renderCountries = new RenderCoutries();
+export default renderCountries;
