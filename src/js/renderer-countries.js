@@ -1,25 +1,16 @@
 import countryCard from "../template/country-card.hbs";
 import CountriesList from "../template/search-countries-list.hbs";
 import { error } from "@pnotify/core";
+import "@pnotify/core/dist/BrightTheme.css";
+import "@pnotify/core/dist/Material.css";
+import { defaults } from "@pnotify/core";
+defaults.delay = 1000;
+defaults.closer = false;
+defaults.sticker = false;
+defaults.styling = "brighttheme";
 
-// import "@pnotify/core/dist/BrightTheme.css";
-// import * as PNotifyDesktop from "@pnotify/desktop";
 import getRefs from "./getRefs";
 const refs = getRefs();
-
-// const myError = error({
-//   text: "Too many matches found. Please enter a more specific query!",
-// });
-
-// defaults.delay = 2000;
-// defaults.closer = false;
-// defaults.sticker = false;
-// defaultModules.set(PNotifyDesktop, {});
-
-// /**
-//  * Класс который рендерит разметку на основе полученных
-//  * данных о стране или странах
-//  */
 
 class RenderCoutries {
   constructor() {
@@ -64,5 +55,7 @@ class RenderCoutries {
   }
 }
 
-const renderCountries = new RenderCoutries();
-export default renderCountries;
+// const renderCountries = new RenderCoutries();
+// export default renderCountries;
+
+export default new RenderCoutries();

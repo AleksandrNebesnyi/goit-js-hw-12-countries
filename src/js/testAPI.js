@@ -1,5 +1,5 @@
 import getRefs from "./getRefs";
-import API from "./fetchCountries";
+import API from "./fetch-countries";
 import debounce from "lodash.debounce";
 import { error } from "@pnotify/core";
 import renderCountries from "./renderer-countries";
