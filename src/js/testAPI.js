@@ -13,7 +13,7 @@ import CountriesList from "../template/search-countries-list.hbs";
 const refs = getRefs();
 console.log(renderCountries.CountriesList);
 
-// По значению инпута получаем массив стран с API и рендерим новые элементы
+// По значению инпута получаем массив стран с API и рендерим новые элементы  
 refs.input.addEventListener("input", debounce(onInputChange, 500));
 function onInputChange(evt) {
   // renderCountries.clearCountriesList();
