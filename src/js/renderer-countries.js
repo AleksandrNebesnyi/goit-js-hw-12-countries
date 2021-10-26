@@ -1,13 +1,22 @@
 import countryCard from "../template/country-card.hbs";
 import CountriesList from "../template/search-countries-list.hbs";
-import { error } from "@pnotify/core";
+// Импорты pnotify
+
+import {
+  info,
+  success,
+  error,
+  defaultModules,
+  defaults,
+  Stack,
+} from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
 import "@pnotify/core/dist/BrightTheme.css";
-import "@pnotify/core/dist/Material.css";
-import { defaults } from "@pnotify/core";
+import * as PNotifyMobile from "@pnotify/mobile";
+import "@pnotify/mobile/dist/PNotifyMobile.css";
+
 defaults.delay = 1000;
-defaults.closer = false;
-defaults.sticker = false;
-defaults.styling = "brighttheme";
+defaultModules.set(PNotifyMobile, {});
 
 import getRefs from "./getRefs";
 const refs = getRefs();
@@ -35,8 +44,25 @@ class RenderCoutries {
       // рендерим список стран.
       this.CountriesList.insertAdjacentHTML("beforeend", CountriesList(data));
     } else {
-      error({
-        text: "Too many matches found. Please enter a more specific query!",
+      return info({
+        title: "Too many matches found. Please enter a more specific query!",
+        stack: new Stack({
+          dir1: "down",
+          dir2: "right", // Position from the top left corner.
+          firstpos1: 90,
+          firstpos2: 200, // 90px from the top, 200px from the left.
+        }),
+        modules: new Map([
+          [
+            ...defaultModules,
+            [
+              PNotifyMobile,
+              {
+                swipeDismiss: false,
+              },
+            ],
+          ],
+        ]),
       });
     }
   }
